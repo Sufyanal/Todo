@@ -28,9 +28,13 @@ class TodolistState extends State<Todolist> {
 
  @override
   void initState() {
-    setState(() {
-      controller.getData();
-    });
+    
+      controller.getData().then((value) {
+        setState(() {
+          
+        });
+      });
+   
     super.initState();
   }
 

@@ -2,25 +2,25 @@ class Todo{
    String title = "";
    String description = "";
    String ? tag;
-   int ? proprity;
-   DateTime todoDay = DateTime.now();
-   bool? isComplited ;
+    DateTime todoDay = DateTime.now();
+   bool isCompleted = false ;
+    int ? proprity;
 
    Todo({
     required this.title,
     required this.description,
     this.tag,
-    this.proprity,
     required this.todoDay,
-    this.isComplited =false,
+    this.isCompleted =false,
+     this.proprity,
   });
  Todo.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     description = json['description'];
     tag = json['tag'];
-    proprity = json['proprity'];
     todoDay = DateTime.parse(json['todoDay']);
-    isComplited = json['isComplites'];
+    isCompleted = json['isCompleted'];
+     proprity = json['proprity'];
   }
 
   Map<String, dynamic> toJson() {
@@ -30,7 +30,7 @@ class Todo{
     data['tag'] = this.tag;
     data['proprity'] = this.proprity;
     data['todoDay'] = this.todoDay.toString();
-    data['isComplited'] = this.isComplited;
+    data['isCompleted'] = this.isCompleted;
     return data;
   }
  }

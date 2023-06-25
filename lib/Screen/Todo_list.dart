@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todo_1/Controllar/todo_controller.dart';
 import 'package:todo_1/Models/todo_modals.dart';
 import 'package:todo_1/widget/Sidebar.dart';
@@ -60,26 +61,25 @@ class TodolistState extends State<Todolist> {
         child:Icon(
           Icons.add,
         ),
-        backgroundColor: Color(0xff8687E7),
+        
          ),
        body:
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 20), 
          child: Column(
         children: [
+          Lottie.asset("Animation/2.json",
+          height: 100
+          ),
               _showtextfield(),
                 const SizedBox(
                  height: 20,
                 ),
                 Expanded(
+                    
                     child: controller.searchedTodolist?.length ==0 ? Center(
                       child: Text("No Task",
-                      style: GoogleFonts.telex(
-                        color: Color.fromARGB(255, 248, 246, 252),
-                      fontSize: 35,
-                      fontWeight: FontWeight.w400,
-
-                      ),),
+                      style: Theme.of(context).textTheme.bodyMedium,),
                     ):
                      ListView.builder(
                       itemBuilder:((context, index) {
@@ -109,13 +109,11 @@ class TodolistState extends State<Todolist> {
   }
  AppBar _showAppbar(){
     return AppBar(
-        backgroundColor: Colors.black,
-        // leading: Padding(
-        //   padding: const EdgeInsets.all(9.0),
-        //   child: Image.asset("assets/sort.png",
-          
-        //   ),
-        // ),
+        leading: Padding(
+          padding: const EdgeInsets.all(9.0),
+          child: InkWell(
+            child: Image.asset("assets/sort.png",),),
+        ),
         title: const Center(
           child: Text(
           "Todo",
@@ -126,8 +124,7 @@ class TodolistState extends State<Todolist> {
             padding: const EdgeInsets.all( 10),
             child: Image.asset("assets/user.png"),
           )
-        ],
-      
+        ], 
       );
   }
  Container _showtextfield (){
@@ -137,11 +134,7 @@ class TodolistState extends State<Todolist> {
     ),
     child: TextField(
              cursorColor: const Color(0xff979797),
-             style:const TextStyle(
-                color: Color(0xffAFAFAF),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-             ) ,
+             style:Theme.of(context).textTheme.bodyMedium,
              onChanged:(value){
                setState(() {
                  controller.searchTodo(value);
@@ -159,12 +152,7 @@ class TodolistState extends State<Todolist> {
                   
                    ),
                 hintText: "Search For Your Task ",
-                hintStyle: const TextStyle(
-                 fontStyle: FontStyle.italic,
-                 fontWeight: FontWeight.w400,
-                 fontSize: 16,
-                 color: Color(0xFFAFAFAF),
-                ) ,
+                hintStyle: Theme.of(context).textTheme.bodyMedium,
                 border: const OutlineInputBorder( ),
                 focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xff979797)),
@@ -175,54 +163,36 @@ class TodolistState extends State<Todolist> {
  }
     Widget _showBottomSheet(){
     return Container(
-      color: const Color(0xff363636) ,
+      color: Theme.of(context).colorScheme.secondary,
       child: Padding(
-          
            padding: EdgeInsets.fromLTRB
          (25, 25, 25, MediaQuery.of(context).viewInsets.bottom),
-    
            child: Column(
-            
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children:  [
-              
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(bottom: 16.0),
                 child: Text(
                   "Add Task",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white
-                  ),
+                  style: Theme.of(context).textTheme.bodyLarge,
                  ),
                 ),
                 Padding( 
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
-                    
                     textInputAction: TextInputAction.next,
                     onChanged:( (value){
                         title = value;
                     }),
                     autofocus: true,
                     cursorColor:const Color(0xff979797),
-                    style: const TextStyle(
-                       fontSize: 16,
-                       fontWeight: FontWeight.w400,
-                       color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                     decoration: InputDecoration(
                       fillColor:  const Color(0xff363636),
                       filled: true,
                       hintText: "Add Title",
-                      hintStyle:TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xffFFFFFF).withOpacity(0.89),
-                    ),
+                      hintStyle:Theme.of(context).textTheme.bodyLarge,
                     focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xff979797)), ),
                     enabledBorder: const OutlineInputBorder(
@@ -238,20 +208,12 @@ class TodolistState extends State<Todolist> {
                     }),
                     autofocus: true,
                     cursorColor:const Color(0xff979797),
-                    style: const TextStyle(
-                       fontSize: 16,
-                       fontWeight: FontWeight.w400,
-                       color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                     decoration: InputDecoration(
-                      fillColor:  const Color(0xff363636),
+                      fillColor: Theme.of(context).colorScheme.secondary,
                       filled: true,
                       hintText: "Add Description",
-                      hintStyle:TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xffFFFFFF).withOpacity(0.89),
-                    ),
+                      hintStyle:Theme.of(context).textTheme.bodyLarge,
                     focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xff979797)),
                     ),
@@ -283,10 +245,7 @@ class TodolistState extends State<Todolist> {
                                 style: TextButton.styleFrom(
                                   backgroundColor: Color(0xff363636),
                                   foregroundColor: Colors.white,
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12  ,
-                                  ),
+                                  textStyle: Theme.of(context).textTheme.bodySmall,
                                   primary: Colors.white,
 
                                 ),

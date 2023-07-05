@@ -10,12 +10,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xF5F5F5),
-      body: Center(
+      body: 
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_1/Screen/Todo_list.dart';
+import 'package:todo_1/widget/BottomBar.dart';
 
 
 
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
         
       ),
       debugShowCheckedModeBanner: false,
-      home:  Todolist(),
+      home:  Bottombar(),
     );
   }
 }

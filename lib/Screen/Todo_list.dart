@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:todo_1/Controllar/todo_controller.dart';
 import 'package:todo_1/Models/todo_modals.dart';
+import 'package:todo_1/widget/BottomBar.dart';
 import 'package:todo_1/widget/Sidebar.dart';
 import 'package:todo_1/widget/todo_tiles.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 
 
@@ -25,7 +26,7 @@ class TodolistState extends State<Todolist> {
   String ? title,description;
   DateTime? date;
   Todocontroller controller = Todocontroller(); 
-  
+     int currentSelectedIndex = 0;  
 
  @override
   void initState() {
@@ -44,7 +45,6 @@ class TodolistState extends State<Todolist> {
     return Scaffold(
       backgroundColor: Colors.black,
       drawer: sidebar(),
-      appBar: _showAppbar(),
       floatingActionButton: FloatingActionButton(
         onPressed: (() {
           showModalBottomSheet(
@@ -52,8 +52,7 @@ class TodolistState extends State<Todolist> {
    isScrollControlled: true,
             shape: RoundedRectangleBorder(
               borderRadius: 
-                 BorderRadius.vertical(top: Radius.circular(30))),
-                 
+                 BorderRadius.vertical(top: Radius.circular(30))),    
              builder: (context){
               return _showBottomSheet();
              });
@@ -61,7 +60,6 @@ class TodolistState extends State<Todolist> {
         child:Icon(
           Icons.add,
         ),
-        
          ),
        body:
           Padding(
@@ -107,26 +105,7 @@ class TodolistState extends State<Todolist> {
       );
 
   }
- AppBar _showAppbar(){
-    return AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(9.0),
-          child: InkWell(
-            child: Image.asset("assets/sort.png",),),
-        ),
-        title: const Center(
-          child: Text(
-          "Todo",
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all( 10),
-            child: Image.asset("assets/user.png"),
-          )
-        ], 
-      );
-  }
+
  Container _showtextfield (){
   return Container(
     decoration: BoxDecoration(

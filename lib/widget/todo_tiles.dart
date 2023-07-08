@@ -9,10 +9,10 @@ import '../Models/todo_modals.dart';
 class Todotiles extends StatefulWidget {
   Todotiles({
     required this.todo,
-    required this.onPressed,
+   this.deleteTodo,
   });
   Todo todo;
-  Function()onPressed;
+  final Function? deleteTodo;
   @override
   State<Todotiles> createState() => _TodotilesState();
 }
@@ -67,12 +67,19 @@ class _TodotilesState extends State<Todotiles> {
                  ),
                
                  Spacer(),
+                 CircleAvatar(  
+                  radius: 30,
+                  // foregroundImage: AssetImage(widget.todo.image),
+                 ),
+                 Spacer(),
                  Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(padding: EdgeInsets.all(1)),   
                          IconButton( 
-                          onPressed:widget.onPressed,
+                          onPressed:(){
+                            widget.deleteTodo!();
+                          },
                            icon: Icon(
                             Icons.delete,
                             color: Colors.white,

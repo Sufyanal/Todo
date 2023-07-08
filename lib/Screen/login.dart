@@ -19,10 +19,10 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            const Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 20),
                   child:Text("Login",
                   style: TextStyle(
                     fontSize: 32,
@@ -36,12 +36,12 @@ class _LoginState extends State<Login> {
             SizedBox(
                height: 30,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15),
+                  padding: EdgeInsets.only(left: 15),
                   child: Text("Username",
                   style: TextStyle(
                     fontSize: 16,
@@ -55,8 +55,8 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 6,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
                 decoration: InputDecoration(
                   fillColor: Color.fromARGB(244, 45, 255, 244),
@@ -78,13 +78,13 @@ class _LoginState extends State<Login> {
      SizedBox(
       height: 20,
      ),
-           Row(
+           const Row(
             mainAxisAlignment: MainAxisAlignment.start,
              children: [
                Row(
                  children: [
                    Padding(
-                     padding: const EdgeInsets.only(left: 15 ),
+                     padding: EdgeInsets.only(left: 15 ),
                      child: Text("Password",
                       style: TextStyle(
                         fontSize: 16,
@@ -97,11 +97,11 @@ class _LoginState extends State<Login> {
                ),
              ],
            ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 20),
+             const Padding(
+               padding: EdgeInsets.symmetric(horizontal: 20),
                child: TextField(
                 decoration: InputDecoration(
                    fillColor: Color.fromARGB(244, 45, 255, 244),

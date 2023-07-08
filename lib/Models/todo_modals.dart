@@ -4,7 +4,8 @@ class Todo{
    String ? tag;
     DateTime todoDay = DateTime.now();
    bool isCompleted = false ;
-    int ? proprity;
+   int ? proprity;
+   
 
    Todo({
     required this.title,
@@ -13,6 +14,7 @@ class Todo{
     required this.todoDay,
     this.isCompleted =false,
      this.proprity,
+   
   });
  Todo.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -26,6 +28,7 @@ class Todo{
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
+    
     data['description'] = this.description;
     data['tag'] = this.tag;
     data['proprity'] = this.proprity;

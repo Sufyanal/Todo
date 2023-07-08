@@ -11,7 +11,7 @@ class Todocontroller{
   List<Todo> ?searchedTodolist;
   String message = "";
 
-   void addtodo(String title, String description,DateTime date, BuildContext context){
+   void addtodo(String title, String description,DateTime date, BuildContext context,){
      Todo _todo =
     Todo(title: title, description: description, todoDay: date,);
      todoList.add(_todo);

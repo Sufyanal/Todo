@@ -36,7 +36,7 @@ class _BottombarState extends State<Bottombar> {
          backgroundColor: Theme.of(context).colorScheme.secondary,
          type: BottomNavigationBarType.fixed,
          selectedItemColor: Theme.of(context).colorScheme.primary,
-         unselectedItemColor: Theme.of(context).colorScheme.secondary,
+         unselectedItemColor: Theme.of(context).colorScheme.onBackground,
           items: const [
             BottomNavigationBarItem(icon:Icon(Icons.home,),label: "Home",tooltip: "Home"),
             BottomNavigationBarItem(icon:Icon(Icons.search,),label: "Search",tooltip: "Search for todo"),

@@ -1,11 +1,14 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:todo_1/Controllar/todo_controller.dart';
 import 'package:todo_1/Models/todo_modals.dart';
-import 'package:todo_1/widget/BottomBar.dart';
+
 import 'package:todo_1/widget/Sidebar.dart';
 import 'package:todo_1/widget/todo_tiles.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 
@@ -23,10 +26,11 @@ class Todolist extends StatefulWidget {
 
 class TodolistState extends State<Todolist> {
   
-  String ? title,description;
+  String ? title,description,image;
   DateTime? date;
   Todocontroller controller = Todocontroller(); 
-     int currentSelectedIndex = 0;  
+     int currentSelectedIndex = 0; 
+     File? todoImage; 
 
  @override
   void initState() {
@@ -84,9 +88,12 @@ class TodolistState extends State<Todolist> {
                         Todo item = controller.searchedTodolist !=null
                         ?controller.searchedTodolist![index]
                         : controller.todoList[index];
-                         return Todotiles(todo:item, onPressed: () { 
+                         return Todotiles(
+                          todo:item,
+                           deleteTodo: () { 
                           setState(() {
                             controller.todoList.removeAt(index);
+                            controller.setData();
                           });
                           
                           },);
@@ -157,6 +164,75 @@ class TodolistState extends State<Todolist> {
                   style: Theme.of(context).textTheme.bodyLarge,
                  ),
                 ),
+                
+               InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(15))),
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  builder: (context) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          onTap: () async {
+                            final ImagePicker picker = ImagePicker();
+                            XFile? image = await picker.pickImage(
+                                source: ImageSource.camera);
+                            print(image?.name);
+                            print(image?.path);
+                            if (image != null) {
+                              setState(() {
+                                todoImage = File(image!.path);
+                              });
+                            }
+                            Navigator.pop(context);
+                          },
+                          textColor: Theme.of(context).colorScheme.onPrimary,
+                          iconColor: Theme.of(context).colorScheme.onPrimary,
+                          leading: Icon(Icons.camera),
+                          title: Text("Pick from Camera"),
+                        ),
+                        ListTile(
+                          onTap: () async {
+                            final ImagePicker picker = ImagePicker();
+                            XFile? image = await picker.pickImage(
+                                source: ImageSource.gallery);
+                            print(image?.name);
+                            print(image?.path);
+                            if (image != null) {
+                              setState(() {
+                                todoImage = File(image!.path);
+                              });
+                            }
+                            Navigator.pop(context);
+                          },
+                          textColor: Theme.of(context).colorScheme.onPrimary,
+                          iconColor: Theme.of(context).colorScheme.onPrimary,
+                          leading: Icon(Icons.photo),
+                          title: Text("Pick from Gallery"),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    );
+                  });
+            },
+            child: CircleAvatar(
+              child: Icon(Icons.add_a_photo),
+              radius: 35,
+              foregroundImage: todoImage == null ? null : FileImage(todoImage!),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
                 Padding( 
                   padding: EdgeInsets.only(bottom: 12),
                   child: TextField(
@@ -239,16 +315,19 @@ class TodolistState extends State<Todolist> {
                              builder:( context, child) {
                            return Theme(
                             data: Theme.of(context).copyWith(
-                              timePickerTheme: TimePickerThemeData(
+                              timePickerTheme: const TimePickerThemeData(
                                 backgroundColor: Color(0xff363636),
                                 hourMinuteColor: Colors.white,
                                 hourMinuteTextColor:Colors.blue,
                                 dialBackgroundColor: Colors.white,
                                 dialHandColor: Colors.black,
-                                entryModeIconColor: Colors.white,
+                                entryModeIconColor: Color.fromARGB(255, 54, 23, 23),
+                                dialTextColor: Color.fromRGBO(70, 28, 221, 1),
+
+
                               ),
                               
-                              textTheme: TextTheme(
+                              textTheme: const TextTheme(
                                 overline: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -289,11 +368,12 @@ class TodolistState extends State<Todolist> {
                           print(title);
                           print(description);
                           print(date);
+                          print(image);
                           
                           // true ,true , false
-                          if(title!=null && description!=null && date!=null){
+                          if(title!=null && description!=null && date!=null ){
                             setState(() {
-                             controller.addtodo( title!,description!,date!,context);
+                             controller.addtodo( title!,description!,date!,context,);
                             });
                             
                           }else{

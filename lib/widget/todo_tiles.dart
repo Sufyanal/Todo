@@ -46,31 +46,36 @@ class _TodotilesState extends State<Todotiles> {
                  ),     
                     Padding(
                      padding: const EdgeInsets.only(left: 10),
-                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
-                        Text(
-                          '${widget.todo.title}',
-                        style:Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(
-                   height: 2,
-                        ),
-                        Text(
-                           DateFormat('MMM dd yyyy HH:mm')
-                        .format(widget.todo.todoDay),
-                        style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        ],
+                     child: Expanded(
+                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:  [
+                          Text(
+                            '${widget.todo.title}',
+                          style:Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          const SizedBox(
+                                        height: 2,
+                          ),
+                          Text(
+                             DateFormat('MMM dd yyyy HH:mm')
+                          .format(widget.todo.todoDay),
+                          style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          ],
+                       ),
                      ),
                  ),
                
                  Spacer(),
-                 CircleAvatar(  
-                  radius: 30,
-                  // foregroundImage: AssetImage(widget.todo.image),
+                if(widget.todo.image != null)
+                 Image.file(
+                  widget.todo.image!,
+                  width: 30,
                  ),
+                
+               
                  Spacer(),
                  Row(
                         mainAxisAlignment: MainAxisAlignment.end,

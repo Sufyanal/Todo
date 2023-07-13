@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Todo{
    String title = "";
    String description = "";
@@ -5,7 +7,7 @@ class Todo{
     DateTime todoDay = DateTime.now();
    bool isCompleted = false ;
    int ? proprity;
-   
+   File? image;
 
    Todo({
     required this.title,
@@ -14,6 +16,7 @@ class Todo{
     required this.todoDay,
     this.isCompleted =false,
      this.proprity,
+     this.image,
    
   });
  Todo.fromJson(Map<String, dynamic> json) {
@@ -23,6 +26,10 @@ class Todo{
     todoDay = DateTime.parse(json['todoDay']);
     isCompleted = json['isCompleted'];
      proprity = json['proprity'];
+      if (json["image"] != null && json["image"] != "") {
+      image = File(json["image"]);
+    }
+     
   }
 
   Map<String, dynamic> toJson() {
@@ -34,6 +41,9 @@ class Todo{
     data['proprity'] = this.proprity;
     data['todoDay'] = this.todoDay.toString();
     data['isCompleted'] = this.isCompleted;
+     if (this.image != null) {
+      data['image'] = this.image!.path;
+    }
     return data;
   }
  }
